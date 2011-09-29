@@ -1,0 +1,20 @@
+<div id="newsbanner">
+    <div id="banner-clip">
+          <div id="banner-wrapper">
+          {% for banner in resource.meta.banners %}
+            <div class="banner">
+                 <a href="{{ banner.link }}"><img src="{{ banner.image }}" height="100%" width="100%" alt="newsbanner feature"></a>
+               <div class="banner-text">
+                       <h2><a href="{{ banner.link }}">{{ banner.heading }}</a></h2>
+                       <p><a href="{{ banner.link }}">{{ banner.text }}</a></p>
+               </div>
+            </div>
+          {% endfor %}
+          </div>
+    </div>
+    <ol>
+            {% for banner in resource.meta.banners %}
+            <li><a href="{{ banner.link }}" tabindex="-1">{{ banner.heading }}</a></li>
+            {% endfor %}
+    </ol>
+</div>
