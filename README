@@ -1,0 +1,5 @@
+This is a layout for the Hyde static site generator.
+It is based on the University of Melbourne web templates (https://github.com/marcom-unimelb/The-University-of-Melbourne-Web-Templates.git). Those templates have been re-imagined using Jinja2 templates.
+
+layout folder contains the new templates and things which do not change.
+content folder contains that which changes, and all media
