@@ -1,0 +1,7 @@
+{% macro render_main_menu() -%}
+<ul>
+{% for menu_item in menu -%}
+    <li><a {% if menu_item.classes is defined%} class="{{ menu_item.classes|join(' ')}}{% if menu_item.url == resource.url %} selected{% endif %}"{% endif %} href="{{ menu_item.url }}">{{ menu_item.title }}</a></li>
+{%- endfor %}
+</ul>
+{%- endmacro %}

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+{% block starthead %}{% endblock starthead %}
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>{% block title %}{{ resource.meta.title }}{% endblock title %}</title>  
+<!-- SEO relevant meta data to describe content of page -->
+<!-- DC.Xxx changed to dcterms.xxx in accordance with html5 validation PM 2011 -->
+  <meta name="dcterms.title" content="{{ resource.meta.title }}">
+  <meta name="keywords" content="">
+  <meta name="description" content="{{ resource.meta.description }}">
+  <meta name="dcterms.description" content="{{ resource.meta.description }}">
+<!-- End SEO relevant meta data -->
+<!-- Authoriser and maintainer related meta data - developers, don't forget humans.txt   -->
+  <meta name="dcterms.creator" content="The University of Melbourne">
+  <meta name="dcterms.contributor" content="{{ meta.contributor }}">
+  <meta name="author" content="{{ resource.meta.author }}">
+<!--
+  UM. metadata commented out for validation PM 2011
+  <meta name="UM.Authoriser.Name" content="{{ authoriser.name }}">
+  <meta name="UM.Authoriser.Title" content="{{ authoriser.title }}">
+  <meta name="UM.Maintainer.Name" content="{{ maintainer.name }}">
+  <meta name="UM.Maintainer.Department" content="{{ maintainer.department }}">
+  <meta name="UM.Maintainer.Email" content="{{ maintainer.email }}">
+-->
+<!-- End authoriser and maintainer meta data -->
+<!-- Static meta data   -->
+  <meta name="dcterms.rights" content="http://www.unimelb.edu.au/disclaimer">
+  <meta name="dcterms.publisher" content="The University of Melbourne">
+  <meta name="dcterms.format" content="text/html">
+  <meta name="dcterms.language" content="en">
+  <meta name="dcterms.identifier" content="http://www.unimelb.edu.au/">
+<!-- End static meta data -->
+<!-- Meta data to be autofilled -->
+  <meta name="dcterms.Date" content="">
+  <!--#config timefmt="%Y-%m-%d" --><meta name="dcterms.modified" content="<!--#echo var='LAST_MODIFIED' -->">
+<!-- End meta data to be autofilled -->
+  <meta content="width=device-width; initial-scale=0.67;" name="viewport">
+
+  <!-- GLOBAL RESOURCES -->
+  <!-- DO NOT CHANGE -->
+    <link rel="stylesheet" href="http://brand.unimelb.edu.au/web-templates/1-0/css/complete.css">
+    <script src="http://brand.unimelb.edu.au/web-templates/LATEST/js/complete.js"></script>
+    <script src="http://brand.unimelb.edu.au/global-header/js/injection.js"></script>
+  <!-- /GLOBAL RESOURCES -->
+  <link rel="stylesheet" href="{{ media_url('css/custom.css') }}" media="screen">
+</head>
+<body class="{{ resource.meta.body_classes|join(' ') }}{% block base_body_classes %}{% endblock base_body_classes %}">
+  <div class="wrapper">
+    <div class="header">
+      <div class="hgroup">
+        <!-- <p><a href="#">{{ faculty }}</a></p> -->
+        {% block hgroup %}{% endblock hgroup %}
+      </div>
+      {% block newsbanner %}{% endblock newsbanner %}
+   <div class="main col-6" id="main-content" role="main">
+  {% block main_content_title %}{% endblock main_content_title %}
+  {% block main_content %}{% filter markdown -%}{% block extra_content %}{% endblock extra_content %}{%- endfilter %}{% endblock main_content %}
+  </div>
+  {% block nav %}{% endblock nav %}
+  {% block aside %}{% endblock aside %}
+</div>
+  <hr>
+  <div class="footer">
+    <div id="local" class="wrapper">
+      <p class="footertitle"><a href="{{ web }}">{{ school }}</a></p>
+      <div id="org-details" class="col-2">
+        <p><strong>{{ faculty }}</strong></p>
+        <p class="location">{{ location }}</p>
+      </div>
+
+      <ul class="col-2">
+        <li><strong>Phone:</strong> {{ phone }}</li>
+        <li><strong>Fax:</strong> {{ fax }}</li>
+        <li><strong>Email:</strong> <a href="mailto:{{ email }}">Make an enquiry</a></li>
+        <li class="social">
+          {% for service, value in social %}
+                   {% if value %}
+          <a href="
+                   {{ value }}
+                   " class="icon {{service}} ">{% filter capitalize %}{{ service }}{% endfilter %}</a>
+                   {% endif %}
+          {% endfor %}
+        </li>
+      </ul>
+
+      <ul class="col-2">
+        <li><strong>Authoriser:</strong>
+          <br />{{ authoriser.title }}</li>
+        <li><strong>Maintainer:</strong><br />
+          {% if maintainer.name is defined%}
+            {{ maintainer.name }},
+          {% endif %}
+          {{ faculty }}</li>
+      </ul>
+{% block footerdate %}{% endblock footerdate %}
+
+      <hr>
+    </div>
+{% block index_hr %}{% endblock index_hr %}
+  </div>
+</body>
+</html>

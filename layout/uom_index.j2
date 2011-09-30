@@ -1,0 +1,42 @@
+{% extends "uom_base.j2" %}
+{% block hgroup %}
+<h1>{{ resource.meta.title }}</h1>
+      </div>
+  <div id="headingtext">
+        <p class="title col-1">{% block headingtext_title %}Who we are{% endblock headingtext_title %}</p>
+        <p class="col-5">{% block headingtext %}A pioneering research university, The University of Melbourne has the largest cohort of research students in&nbsp;Australia{% endblock headingtext %}</p>
+ 	<hr>
+  </div>
+{% endblock hgroup %}
+{% block base_body_classes %} headingblock no-logo home{% endblock base_body_classes %}
+{% block newsbanner %}
+    {% include "uom_newsbanner.j2" ignore missing %}
+{% endblock newsbanner %}
+{% block main_content_title %}<h2>{{ resource.meta.main_content_title }}</h2>{% endblock main_content_title %}
+{% block main_content %}
+    {% block page_previews %}
+       {% for preview in resource.meta.page_previews %}
+          {% if loop.first or loop.index0 is divisibleby 3 %}
+  <div class="first col-6">
+          {% endif %}
+       <div class="col-2 {% if loop.index0 is divisibleby 3 %}first {% endif %}page-preview">
+          <img src="{{ preview.image }}" alt="">
+          <h2>{{ preview.heading }}</h2>
+          <p>{{ preview.text }}
+          <a href="{{ preview.link }}" class="button">Read more</a></p>
+       </div>
+          {% if loop.last or loop.index is divisibleby 3 %}
+  </div>
+          {% endif %}
+       {% endfor %}
+    {% endblock page_previews %}
+{% endblock main_content %}
+{% block footerdate %}
+      <ul class="col-2">
+        <li><strong>Date created:</strong><br>
+          11 February 2010</li>
+        <li><!--#config timefmt="%d %B %Y %H:%M:%S" --><strong>Last modified:</strong><br>
+			<!--#echo var="LAST_MODIFIED" --></li>
+      </ul>
+{% endblock footerdate %}
+{% block index_hr %}<hr>{% endblock index_hr %}
